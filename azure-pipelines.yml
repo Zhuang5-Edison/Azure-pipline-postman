@@ -1,0 +1,43 @@
+# azure-pipelines.yml
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: self
+
+# （可选）内网解析/禁用代理：若你的目标是内网 UAT，请按需启用
+# - script: |
+#     echo "10.0.0.12 mms.uat.exyte.net" | sudo tee -a /etc/hosts
+#     unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
+#     export NO_PROXY="mms.uat.exyte.net,.exyte.net,127.0.0.1,localhost"
+#   displayName: 'Pin hosts & disable proxy'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Use Node.js 18'
+
+- script: |
+    npm install -g newman newman-reporter-htmlextra
+    mkdir -p Results
+    newman run collections/New Collection.postman_collection.json \
+      --reporters cli,junit,htmlextra \
+      --reporter-junit-export Results/junitReport.xml \
+      --reporter-htmlextra-export Results/report.html
+  displayName: 'Run Postman tests with Newman'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'Results/junitReport.xml'
+    testRunTitle: 'Postman API Tests'
+  displayName: 'Publish JUnit to Tests'
+  # 若你希望测试失败让流水线失败，保持默认；若仍要发布报告，可 condition: succeededOrFailed()
+
+- publish: Results
+  artifact: postman-results
+  displayName: 'Publish HTML report artifact'
+

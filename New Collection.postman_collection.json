@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "36ba7270-b883-4752-b60a-d6d4f0231ec4",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44740188"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "cfcb1871-5472-4fb0-809a-d22d9f9bd755$MjDowJ8R88NNghmaytCfNBkiUVHVGW3v432CWNgd7Zc=",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "sb-98ac693a-9bdb-43bb-acf9-13ffef64e383!b140533|it-rt-exyte-integration-dev-test!b117912",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://exyte-integration-dev-test.it-cpi018-rt.cfapps.eu10-003.hana.ondemand.com/http/TimeEntry_QGT110?run=full",
+					"protocol": "https",
+					"host": [
+						"exyte-integration-dev-test",
+						"it-cpi018-rt",
+						"cfapps",
+						"eu10-003",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"http",
+						"TimeEntry_QGT110"
+					],
+					"query": [
+						{
+							"key": "run",
+							"value": "full"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
