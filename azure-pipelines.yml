@@ -23,7 +23,7 @@ steps:
 - script: |
     npm install -g newman newman-reporter-htmlextra
     mkdir -p Results
-    newman run collections/New Collection.postman_collection.json \
+    newman run New Collection.postman_collection.json \
       --reporters cli,junit,htmlextra \
       --reporter-junit-export Results/junitReport.xml \
       --reporter-htmlextra-export Results/report.html
